@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { X } from 'lucide-react';
 import { useBanners } from '@/lib/providers';
 import type { SlimBanner as SlimBannerType } from '@/types';
@@ -57,34 +58,40 @@ export function SlimBanner({ className = '' }: SlimBannerProps) {
     return null;
   }
 
-  const backgroundColor = currentBanner.backgroundColor || 'var(--color-primary)';
-  const textColor = currentBanner.textColor || '#ffffff';
-
   const content = (
-    <span className="text-sm font-medium">{currentBanner.text}</span>
+    <span className="relative block h-10 w-full overflow-hidden">
+      <Image
+        src={currentBanner.imageUrl}
+        alt="Promocion"
+        fill
+        className="object-cover object-center"
+        sizes="100vw"
+        priority
+      />
+    </span>
   );
 
   return (
     <div
-      className={`relative py-2 px-4 text-center ${className}`}
-      style={{ backgroundColor, color: textColor }}
+      className={`relative ${className}`}
     >
-      <div className="mx-auto max-w-7xl flex items-center justify-center">
-        {currentBanner.link ? (
-          <Link href={currentBanner.link} className="hover:underline">
-            {content}
-          </Link>
-        ) : (
-          content
-        )}
-      </div>
+      {currentBanner.link ? (
+        <Link
+          href={currentBanner.link}
+          className="block"
+          aria-label="Abrir promocion"
+        >
+          {content}
+        </Link>
+      ) : (
+        content
+      )}
       
       {/* Dismiss button */}
       <button
         onClick={handleDismiss}
-        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-black/10 transition-colors"
+        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-black/20 text-white hover:bg-black/30 transition-colors"
         aria-label="Cerrar banner"
-        style={{ color: textColor }}
       >
         <X className="h-4 w-4" />
       </button>

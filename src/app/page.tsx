@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { ArrowRight, Truck, Shield, CreditCard, HeadphonesIcon } from 'lucide-react';
 import { Button } from '@/components/ui';
 import { HeroBanner } from '@/components/banners';
-import { CarouselsSection } from '@/components/carousels';
+import { HomeSectionsRenderer } from '@/components/home';
 import { ProductGrid } from '@/components/features/products/product-grid';
-import { useStorefrontCarousels } from '@/hooks';
+import { useHomeSections } from '@/hooks';
 
 const features = [
   {
@@ -32,8 +32,7 @@ const features = [
 ];
 
 export default function HomePage() {
-  const { data: carouselsData } = useStorefrontCarousels();
-  const hasCarousels = carouselsData?.data && carouselsData.data.length > 0;
+  const { sections, isLoading, hasContent } = useHomeSections();
 
   return (
     <>
@@ -59,11 +58,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dynamic Product Carousels */}
-      <CarouselsSection />
+      {/* Dynamic Content: Interleaved Carousels & Slim Banners */}
+      <section>
+        <div className="mx-auto max-w-7xl">
+          <HomeSectionsRenderer 
+            sections={sections} 
+            isLoading={isLoading}
+            skeletonCount={4}
+          />
+        </div>
+      </section>
 
-      {/* Fallback: Featured Products Section (shown when no carousels configured) */}
-      {!hasCarousels && (
+      {/* Fallback: Featured Products Section (shown when no content configured) */}
+      {!isLoading && !hasContent && (
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-8">

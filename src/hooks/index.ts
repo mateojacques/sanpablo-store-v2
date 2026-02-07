@@ -5,3 +5,4 @@ export { useSaveCheckoutContact, useCheckoutReview, useConfirmOrder } from './us
 export { useOrders, useOrderById, useOrderByNumber } from './use-orders';
 export { useStorefrontConfig, useStorefrontBranding, useStorefrontColors, useStorefrontBanners, useStorefrontFaq, useStorefrontContact, useStorefrontSeo } from './use-storefront';
 export { useStorefrontCarousels, useCarouselBySlug, useCarouselById } from './use-carousels';
+export { useHomeSections } from './use-home-sections';

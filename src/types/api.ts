@@ -295,10 +295,9 @@ export interface HeroBanner {
 
 export interface SlimBanner {
   id: string;
-  text: string;
+  imageUrl: string;
   link?: string;
-  backgroundColor?: string;
-  textColor?: string;
+  position: 'top' | 'bottom' | 'sidebar';
   isActive: boolean;
   sortOrder: number;
 }

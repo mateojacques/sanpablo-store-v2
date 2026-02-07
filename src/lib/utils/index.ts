@@ -102,3 +102,6 @@ export function getDiscountPercentage(product: { regularPrice: string; salePrice
   const sale = parseFloat(product.salePrice!);
   return Math.round(((regular - sale) / regular) * 100);
 }
+
+// Re-export home sections utilities
+export { interleaveHomeSections, interleaveHomeSectionsCustom } from './home-sections';
