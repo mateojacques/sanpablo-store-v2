@@ -113,18 +113,22 @@ export default function CheckoutReviewPage() {
 
           <ul className="divide-y divide-gray-200">
             {review.items.map((item) => {
-              const effectivePrice = getEffectivePrice({
-                regularPrice: item.product.regularPrice,
-                salePrice: item.product.salePrice,
-              });
+              const product = item.product;
+              const unitPrice = product
+                ? getEffectivePrice({
+                    regularPrice: product.regularPrice,
+                    salePrice: product.salePrice,
+                  })
+                : parseFloat(item.priceAtAdd || '0');
+              const productName = product?.name || 'Producto';
 
               return (
                 <li key={item.id} className="py-4 flex gap-4">
                   <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
-                    {item.product.imageUrl ? (
+                    {product?.imageUrl ? (
                       <Image
-                        src={item.product.imageUrl}
-                        alt={item.product.name}
+                        src={product.imageUrl}
+                        alt={productName}
                         fill
                         className="object-cover"
                       />
@@ -136,14 +140,14 @@ export default function CheckoutReviewPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
-                      {item.product.name}
+                      {productName}
                     </p>
                     <p className="text-sm text-gray-500">
-                      {formatPrice(effectivePrice)} x {item.quantity}
+                      {formatPrice(unitPrice)} x {item.quantity}
                     </p>
                   </div>
                   <p className="text-sm font-medium text-gray-900">
-                    {formatPrice(effectivePrice * item.quantity)}
+                    {formatPrice(unitPrice * item.quantity)}
                   </p>
                 </li>
               );

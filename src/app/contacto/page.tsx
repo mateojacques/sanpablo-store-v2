@@ -42,7 +42,7 @@ export default function ContactoPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900">Direccion</h3>
                   <p className="mt-1 text-gray-600">
-                    {contact?.address || 'Av. Ejemplo 123, Lima, Peru'}
+                    {contact?.address || 'Av. Corrientes 1234, CABA, Argentina'}
                   </p>
                 </div>
               </div>
@@ -55,10 +55,10 @@ export default function ContactoPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900">Telefono</h3>
                   <a 
-                    href={`tel:${contact?.phone || '+51999999999'}`}
+                    href={`tel:${contact?.phone || '+541143211234'}`}
                     className="mt-1 text-[var(--color-primary)] hover:opacity-80"
                   >
-                    {contact?.phone || '+51 999 999 999'}
+                    {contact?.phone || '+54 11 4321-1234'}
                   </a>
                 </div>
               </div>

@@ -132,7 +132,7 @@ export default function CheckoutContactPage() {
           <Input
             label="Telefono"
             type="tel"
-            placeholder="+51 999 999 999"
+            placeholder="+54 11 4321-1234"
             error={errors.phone?.message}
             {...register('phone')}
           />

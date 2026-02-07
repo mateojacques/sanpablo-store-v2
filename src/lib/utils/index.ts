@@ -11,9 +11,9 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Format price as currency
  */
-export function formatPrice(price: string | number, currency = 'PEN'): string {
+export function formatPrice(price: string | number, currency = 'ARS'): string {
   const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
-  return new Intl.NumberFormat('es-PE', {
+  return new Intl.NumberFormat('es-AR', {
     style: 'currency',
     currency,
   }).format(numericPrice);
@@ -24,7 +24,7 @@ export function formatPrice(price: string | number, currency = 'PEN'): string {
  */
 export function formatDate(date: string | Date, options?: Intl.DateTimeFormatOptions): string {
   const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString('es-PE', {
+  return d.toLocaleDateString('es-AR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

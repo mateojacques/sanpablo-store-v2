@@ -33,10 +33,10 @@ export const storefrontDefaults: StorefrontConfig = {
   faq: [],
   
   contact: {
-    whatsappNumber: '+51999999999',
+    whatsappNumber: '+5491123456789',
     email: 'contacto@sanpablo.com',
-    phone: '+51 999 999 999',
-    address: 'Av. Ejemplo 123, Lima, Peru',
+    phone: '+54 11 4321-1234',
+    address: 'Av. Corrientes 1234, CABA, Argentina',
     socialLinks: {},
   },
   

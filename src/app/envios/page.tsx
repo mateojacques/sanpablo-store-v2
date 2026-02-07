@@ -10,12 +10,12 @@ const shippingInfo = [
   {
     icon: Truck,
     title: 'Envio a Domicilio',
-    description: 'Entregamos en todo el Peru. Los tiempos de entrega varian segun tu ubicacion.',
+    description: 'Entregamos en toda la Argentina. Los tiempos de entrega varian segun tu ubicacion.',
   },
   {
     icon: Clock,
     title: 'Tiempos de Entrega',
-    description: 'Lima Metropolitana: 1-3 dias habiles. Provincias: 5-10 dias habiles.',
+    description: 'CABA y GBA: 1-3 dias habiles. Interior: 5-10 dias habiles.',
   },
   {
     icon: MapPin,
@@ -70,25 +70,25 @@ export default function EnviosPage() {
             </thead>
             <tbody className="divide-y">
               <tr>
-                <td className="py-3 px-4 text-gray-700">Lima Metropolitana</td>
+                <td className="py-3 px-4 text-gray-700">CABA y GBA</td>
                 <td className="py-3 px-4 text-gray-700">1-3 dias habiles</td>
-                <td className="py-3 px-4 text-gray-700">S/ 10.00</td>
+                <td className="py-3 px-4 text-gray-700">ARS 10.00</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 text-gray-700">Provincias Costa</td>
+                <td className="py-3 px-4 text-gray-700">Interior (centro/region pampeana)</td>
                 <td className="py-3 px-4 text-gray-700">3-5 dias habiles</td>
-                <td className="py-3 px-4 text-gray-700">S/ 15.00</td>
+                <td className="py-3 px-4 text-gray-700">ARS 15.00</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 text-gray-700">Provincias Sierra/Selva</td>
+                <td className="py-3 px-4 text-gray-700">Interior (NOA/NEA/Patagonia)</td>
                 <td className="py-3 px-4 text-gray-700">5-10 dias habiles</td>
-                <td className="py-3 px-4 text-gray-700">S/ 20.00</td>
+                <td className="py-3 px-4 text-gray-700">ARS 20.00</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p className="mt-4 text-sm text-gray-500">
-          * Envio gratis en compras mayores a S/ 100.00 para Lima Metropolitana.
+          * Envio gratis en compras mayores a ARS 100.00 para CABA y GBA.
         </p>
       </div>
     </div>

@@ -21,32 +21,41 @@ export function StoreLogo({ variant = 'header', className = '' }: StoreLogoProps
   const storeName = branding?.storeName ?? storefrontDefaults.branding.storeName;
 
   if (isLoading) {
-    return <Skeleton className={`h-8 w-32 ${className}`} />;
+    const skeletonClassName = variant === 'header' ? 'h-8 w-[140px]' : 'h-10 w-[160px]';
+    return <Skeleton className={`${skeletonClassName} ${className}`} />;
   }
 
+  const logoBoxClassName = variant === 'header' ? 'h-8 w-[140px]' : 'h-10 w-[160px]';
+
   const content = logoUrl ? (
-    <Image
-      src={logoUrl}
-      alt={storeName}
-      width={variant === 'header' ? 140 : 160}
-      height={variant === 'header' ? 32 : 40}
-      className="h-auto w-auto object-contain"
-      priority={variant === 'header'}
-    />
+    <span className={`relative block ${logoBoxClassName} overflow-hidden ${className}`}>
+      <Image
+        src={logoUrl}
+        alt={storeName}
+        fill
+        sizes={variant === 'header' ? '140px' : '160px'}
+        className="object-cover object-center"
+        priority={variant === 'header'}
+      />
+    </span>
   ) : (
     <span 
       className={`font-bold ${
         variant === 'header' 
           ? 'text-xl text-[var(--color-primary)]' 
           : 'text-2xl text-white'
-      } ${className}`}
+      } ${logoBoxClassName} ${className} overflow-hidden whitespace-nowrap text-ellipsis`}
     >
       {storeName}
     </span>
   );
 
   return (
-    <Link href="/" className="flex items-center gap-2 h-10 w-50">
+    <Link
+      href="/"
+      aria-label={storeName}
+      className={`inline-flex items-center ${variant === 'header' ? 'h-8' : 'h-10'} shrink-0`}
+    >
       {content}
     </Link>
   );

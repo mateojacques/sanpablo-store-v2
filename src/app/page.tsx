@@ -12,7 +12,7 @@ const features = [
   {
     icon: Truck,
     title: 'Envio Gratis',
-    description: 'En compras mayores a S/100',
+    description: 'En compras mayores a ARS 20.000',
   },
   {
     icon: Shield,
