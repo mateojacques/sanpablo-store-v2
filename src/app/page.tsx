@@ -102,29 +102,8 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="bg-[var(--color-primary)] text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Suscribete a nuestro boletin
-            </h2>
-            <p className="mt-4 text-lg opacity-90 max-w-2xl mx-auto">
-              Recibe ofertas exclusivas, novedades y descuentos especiales directamente en tu correo.
-            </p>
-            <form className="mt-8 flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Tu correo electronico"
-                className="flex-1 h-12 px-4 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <Button type="submit" size="lg" className="bg-white text-[var(--color-primary)] hover:bg-gray-100">
-                Suscribirse
-              </Button>
-            </form>
-          </div>
-        </div>
-      </section>
+      {/* Instagram Feed Section -- TODO: config this */}
+      {/* <InstagramFeed maxPosts={6} /> */}
     </>
   );
 }

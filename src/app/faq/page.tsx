@@ -47,40 +47,6 @@ function FaqSkeleton() {
   );
 }
 
-// Default FAQs when API doesn't return any
-const defaultFaqs: StorefrontFaq[] = [
-  {
-    id: '1',
-    question: 'Como puedo realizar un pedido?',
-    answer: 'Puedes realizar un pedido navegando por nuestros productos, agregandolos al carrito y completando el proceso de checkout. Aceptamos diferentes metodos de pago para tu comodidad.',
-    sortOrder: 1,
-  },
-  {
-    id: '2',
-    question: 'Cuales son los tiempos de entrega?',
-    answer: 'Los tiempos de entrega varian segun tu ubicacion. Generalmente, los pedidos se entregan entre 3 a 7 dias habiles dentro de la ciudad y hasta 10 dias habiles para envios a provincias.',
-    sortOrder: 2,
-  },
-  {
-    id: '3',
-    question: 'Puedo devolver un producto?',
-    answer: 'Si, aceptamos devoluciones dentro de los 15 dias posteriores a la compra, siempre que el producto este en su empaque original y sin uso. Contactanos para iniciar el proceso de devolucion.',
-    sortOrder: 3,
-  },
-  {
-    id: '4',
-    question: 'Como puedo contactar al soporte?',
-    answer: 'Puedes contactarnos a traves de WhatsApp, correo electronico o telefono. Nuestro equipo de soporte esta disponible de lunes a viernes de 9am a 6pm.',
-    sortOrder: 4,
-  },
-  {
-    id: '5',
-    question: 'Tienen tienda fisica?',
-    answer: 'Si, contamos con una tienda fisica donde puedes ver nuestros productos en persona. Visita la seccion de Contacto para ver nuestra direccion y horarios de atencion.',
-    sortOrder: 5,
-  },
-];
-
 export default function FaqPage() {
   const { data: faqs, isLoading, error } = useStorefrontFaq();
   const { data: contact } = useStorefrontContact();
@@ -98,7 +64,7 @@ export default function FaqPage() {
     });
   };
 
-  const faqList = faqs && faqs.length > 0 ? faqs : defaultFaqs;
+  const faqList: StorefrontFaq[] = Array.isArray(faqs) ? faqs : [];
   const sortedFaqs = [...faqList].sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
@@ -126,6 +92,12 @@ export default function FaqPage() {
         ) : error ? (
           <div className="p-8 text-center">
             <p className="text-red-600">Error al cargar las preguntas frecuentes</p>
+          </div>
+        ) : sortedFaqs.length === 0 ? (
+          <div className="p-8 text-center">
+            <p className="text-gray-600">
+              Aun no hay preguntas frecuentes configuradas.
+            </p>
           </div>
         ) : (
           sortedFaqs.map((faq) => (

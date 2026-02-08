@@ -14,7 +14,7 @@ import { ApiException } from '@/lib/api';
 
 const loginSchema = z.object({
   email: z.string().email('Email invalido'),
-  password: z.string().min(1, 'La contrasena es requerida'),
+  password: z.string().min(1, 'La contraseña es requerida'),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -68,9 +68,9 @@ export default function LoginPage() {
 
           <div className="relative">
             <Input
-              label="Contrasena"
+              label="Contraseña"
               type={showPassword ? 'text' : 'password'}
-              placeholder="Tu contrasena"
+              placeholder="Tu contraseña"
               error={errors.password?.message}
               {...register('password')}
             />

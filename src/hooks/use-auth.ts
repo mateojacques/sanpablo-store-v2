@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { authApi } from '@/lib/api';
 import { useAuthStore } from '@/stores/auth-store';
 import { useCartStore } from '@/stores/cart-store';
+import { clearSessionId } from '@/lib/utils';
 import { useMergeCart } from './use-cart';
 import type { LoginInput, RegisterInput, UpdateProfileInput, ChangePasswordInput } from '@/types';
 
@@ -89,13 +90,28 @@ export function useRegister() {
  */
 export function useLogout() {
   const { logout } = useAuthStore();
-  const { clearCart } = useCartStore();
+  const { clearCart, closeCart } = useCartStore();
   const queryClient = useQueryClient();
 
   return () => {
     logout();
+    closeCart();
     clearCart();
-    queryClient.clear();
+
+    // Drop any guest session/cart association
+    clearSessionId();
+
+    // Invalidate/remove only the sensitive user session data
+    queryClient.cancelQueries({ queryKey: ['cart'] });
+    queryClient.removeQueries({ queryKey: ['cart'] });
+    queryClient.cancelQueries({ queryKey: ['checkout'] });
+    queryClient.removeQueries({ queryKey: ['checkout'] });
+    queryClient.cancelQueries({ queryKey: ['profile'] });
+    queryClient.removeQueries({ queryKey: ['profile'] });
+    queryClient.cancelQueries({ queryKey: ['orders'] });
+    queryClient.removeQueries({ queryKey: ['orders'] });
+    queryClient.cancelQueries({ queryKey: ['order'] });
+    queryClient.removeQueries({ queryKey: ['order'] });
   };
 }
 

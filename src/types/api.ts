@@ -25,7 +25,7 @@ export interface ApiError {
 }
 
 // ============ Auth Types ============
-export type UserRole = 'owner' | 'admin' | 'buyer' | 'partner';
+export type UserRole = "owner" | "admin" | "buyer" | "partner";
 
 export interface UserProfile {
   id: string;
@@ -125,8 +125,8 @@ export interface ProductFilters {
   minPrice?: number;
   maxPrice?: number;
   isActive?: boolean;
-  sortBy?: 'name' | 'price' | 'createdAt' | 'updatedAt';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "name" | "price" | "createdAt" | "updatedAt";
+  sortOrder?: "asc" | "desc";
 }
 
 export interface CreateProductInput {
@@ -200,9 +200,19 @@ export interface CheckoutContactInput {
   customerNotes?: string;
 }
 
+export interface CheckoutReviewItem {
+  productId: string;
+  name: string;
+  sku: string;
+  imageUrl: string | null;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: string;
+}
+
 export interface CheckoutReview {
   contact: CheckoutContactInput;
-  items: CartItem[];
+  items: CheckoutReviewItem[];
   subtotal: string;
   total: string;
 }
@@ -215,13 +225,13 @@ export interface CheckoutConfirmation {
 }
 
 // ============ Order Types ============
-export type OrderStatus = 
-  | 'pending' 
-  | 'confirmed' 
-  | 'processing' 
-  | 'shipped' 
-  | 'delivered' 
-  | 'cancelled';
+export type OrderStatus =
+  | "pending"
+  | "confirmed"
+  | "processing"
+  | "shipped"
+  | "delivered"
+  | "cancelled";
 
 export interface OrderItem {
   id: string;
@@ -297,7 +307,7 @@ export interface SlimBanner {
   id: string;
   imageUrl: string;
   link?: string;
-  position: 'top' | 'bottom' | 'sidebar';
+  position: "top" | "bottom" | "sidebar";
   isActive: boolean;
   sortOrder: number;
 }
@@ -323,6 +333,11 @@ export interface StorefrontSeo {
   ogImage: string;
 }
 
+export interface StorefrontLegal {
+  termsMarkdown: string;
+  lastUpdated?: string;
+}
+
 export interface StorefrontConfig {
   version: string;
   lastUpdated: string;
@@ -335,15 +350,16 @@ export interface StorefrontConfig {
   faq: StorefrontFaq[];
   contact: StorefrontContact;
   seo: StorefrontSeo;
+  legal?: StorefrontLegal;
 }
 
 // ============ Import Types ============
-export type ImportStatus = 
-  | 'pending' 
-  | 'processing' 
-  | 'completed' 
-  | 'failed' 
-  | 'cancelled';
+export type ImportStatus =
+  | "pending"
+  | "processing"
+  | "completed"
+  | "failed"
+  | "cancelled";
 
 export interface ImportJob {
   id: string;
@@ -363,7 +379,7 @@ export interface ImportJob {
 }
 
 // ============ Carousel Types ============
-export type CarouselType = 'manual' | 'category';
+export type CarouselType = "manual" | "category";
 
 export interface Carousel {
   id: string;

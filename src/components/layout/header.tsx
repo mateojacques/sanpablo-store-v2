@@ -1,14 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState, type FormEvent } from 'react';
 import { Menu, X, ShoppingCart, User, Search, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui';
 import { StoreLogo } from '@/components/branding';
 import { useAuthStore } from '@/stores/auth-store';
 import { useCartStore } from '@/stores/cart-store';
+import { useLogout } from '@/hooks/use-auth';
 
 const navigation = [
   { name: 'Inicio', href: '/' },
@@ -19,12 +20,23 @@ const navigation = [
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const { toggleCart, getItemCount } = useCartStore();
   const itemCount = getItemCount();
+
+  const logout = useLogout();
+
+  const handleSearchSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    router.push(q ? `/productos?search=${encodeURIComponent(q)}` : '/productos');
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
@@ -57,11 +69,15 @@ export function Header() {
           <div className="hidden md:flex flex-1 max-w-md mx-8">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="search"
-                placeholder="Buscar productos..."
-                className="w-full h-10 pl-10 pr-4 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-50)] focus:border-[var(--color-primary)]"
-              />
+              <form onSubmit={handleSearchSubmit} className="w-full">
+                <input
+                  type="search"
+                  placeholder="Buscar productos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full h-10 pl-10 pr-4 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-50)] focus:border-[var(--color-primary)]"
+                />
+              </form>
             </div>
           </div>
 
@@ -156,11 +172,15 @@ export function Header() {
             <div className="mb-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="search"
-                  placeholder="Buscar productos..."
-                  className="w-full h-10 pl-10 pr-4 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-50)] focus:border-[var(--color-primary)]"
-                />
+                <form onSubmit={handleSearchSubmit}>
+                  <input
+                    type="search"
+                    placeholder="Buscar productos..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full h-10 pl-10 pr-4 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-50)] focus:border-[var(--color-primary)]"
+                  />
+                </form>
               </div>
             </div>
 

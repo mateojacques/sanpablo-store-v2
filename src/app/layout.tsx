@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { Header, Footer, CartDrawer } from '@/components/layout';
-import { SlimBanner } from '@/components/banners';
 import { getStorefrontConfig } from '@/lib/api/storefront-server';
 
 const inter = Inter({
@@ -39,10 +38,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${inter.variable} font-sans antialiased bg-gray-50`}>
+      <body className={`${inter.variable} antialiased bg-gray-50`}>
         <Providers>
           <div className="flex min-h-screen flex-col">
-            <SlimBanner />
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />

@@ -18,11 +18,11 @@ const profileSchema = z.object({
 });
 
 const passwordSchema = z.object({
-  currentPassword: z.string().min(1, 'La contrasena actual es requerida'),
-  newPassword: z.string().min(8, 'La nueva contrasena debe tener al menos 8 caracteres'),
+  currentPassword: z.string().min(1, 'La contraseña actual es requerida'),
+  newPassword: z.string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres'),
   confirmPassword: z.string(),
 }).refine((data) => data.newPassword === data.confirmPassword, {
-  message: 'Las contrasenas no coinciden',
+  message: 'Las contraseñas no coinciden',
   path: ['confirmPassword'],
 });
 
@@ -96,13 +96,13 @@ export default function ProfilePage() {
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
       });
-      success('Contrasena actualizada', 'Tu contrasena ha sido cambiada');
+      success('Contraseña actualizada', 'Tu contraseña ha sido cambiada');
       passwordForm.reset();
     } catch (err) {
       if (err instanceof ApiException) {
         showError('Error', err.message);
       } else {
-        showError('Error', 'No se pudo cambiar la contrasena');
+        showError('Error', 'No se pudo cambiar la contraseña');
       }
     }
   };
@@ -139,7 +139,7 @@ export default function ProfilePage() {
               type="submit"
               isLoading={updateProfile.isPending}
             >
-              Guardar Cambios
+              Guardar cambios
             </Button>
           </form>
         </Card>
@@ -150,26 +150,26 @@ export default function ProfilePage() {
             <div className="p-2 bg-[var(--color-primary)]/10 rounded-lg">
               <Lock className="h-5 w-5 text-[var(--color-primary)]" />
             </div>
-            <CardTitle>Cambiar Contrasena</CardTitle>
+            <CardTitle>Cambiar contraseña</CardTitle>
           </div>
 
           <form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="space-y-4">
             <Input
-              label="Contrasena actual"
+              label="Contraseña actual"
               type="password"
               error={passwordForm.formState.errors.currentPassword?.message}
               {...passwordForm.register('currentPassword')}
             />
 
             <Input
-              label="Nueva contrasena"
+              label="Nueva contraseña"
               type="password"
               error={passwordForm.formState.errors.newPassword?.message}
               {...passwordForm.register('newPassword')}
             />
 
             <Input
-              label="Confirmar nueva contrasena"
+              label="Confirmar nueva contraseña"
               type="password"
               error={passwordForm.formState.errors.confirmPassword?.message}
               {...passwordForm.register('confirmPassword')}
@@ -179,7 +179,7 @@ export default function ProfilePage() {
               type="submit"
               isLoading={changePassword.isPending}
             >
-              Cambiar Contrasena
+              Cambiar contraseña
             </Button>
           </form>
         </Card>

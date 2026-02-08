@@ -12,7 +12,7 @@ import type { OrderStatus } from '@/types';
 
 const statusConfig: Record<OrderStatus, { label: string; variant: 'default' | 'success' | 'warning' | 'danger' | 'info'; icon: typeof Clock }> = {
   pending: { label: 'Pendiente', variant: 'warning', icon: Clock },
-  confirmed: { label: 'Confirmado', variant: 'info', icon: CheckCircle },
+  confirmed: { label: 'Confirmada', variant: 'success', icon: CheckCircle },
   processing: { label: 'En proceso', variant: 'info', icon: Package },
   shipped: { label: 'Enviado', variant: 'success', icon: Truck },
   delivered: { label: 'Entregado', variant: 'success', icon: CheckCircle },

@@ -21,7 +21,7 @@
 @theme inline {
   --color-background: var(--color-background);
   --color-foreground: var(--color-text);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 /* Base styles */
@@ -36,7 +36,7 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-inter);
   line-height: 1.6;
 }
 

@@ -69,9 +69,6 @@ function BannerSlide({ banner }: { banner: HeroBannerType }) {
         priority
       />
       
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
-      
       {/* Content */}
       <div className="absolute inset-0 flex items-center">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">

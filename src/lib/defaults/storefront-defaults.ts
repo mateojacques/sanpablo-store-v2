@@ -45,6 +45,10 @@ export const storefrontDefaults: StorefrontConfig = {
     metaDescription: 'Tu tienda de arte y libreria favorita',
     ogImage: '',
   },
+
+  legal: {
+    termsMarkdown: '',
+  },
 };
 
 /**

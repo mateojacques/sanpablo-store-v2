@@ -15,10 +15,10 @@ import { ApiException } from '@/lib/api';
 const registerSchema = z.object({
   fullName: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
   email: z.string().email('Email invalido'),
-  password: z.string().min(8, 'La contrasena debe tener al menos 8 caracteres'),
+  password: z.string().min(8, 'La contraseña debe tener al menos 8 caracteres'),
   confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
-  message: 'Las contrasenas no coinciden',
+  message: 'Las contraseñas no coinciden',
   path: ['confirmPassword'],
 });
 
@@ -85,7 +85,7 @@ export default function RegisterPage() {
 
           <div className="relative">
             <Input
-              label="Contrasena"
+              label="Contraseña"
               type={showPassword ? 'text' : 'password'}
               placeholder="Minimo 8 caracteres"
               error={errors.password?.message}
@@ -101,9 +101,9 @@ export default function RegisterPage() {
           </div>
 
           <Input
-            label="Confirmar contrasena"
+            label="Confirmar contraseña"
             type={showPassword ? 'text' : 'password'}
-            placeholder="Repite tu contrasena"
+            placeholder="Repite tu contraseña"
             error={errors.confirmPassword?.message}
             {...register('confirmPassword')}
           />
