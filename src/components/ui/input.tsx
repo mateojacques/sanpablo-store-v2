@@ -1,4 +1,4 @@
-import { forwardRef, type InputHTMLAttributes } from 'react';
+import { forwardRef, type InputHTMLAttributes, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,8 +8,23 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = 'text', label, error, helperText, id, ...props }, ref) => {
+  ({ className, type = 'text', label, error, helperText, id, value, defaultValue, onChange, ...props }, ref) => {
     const inputId = id || props.name;
+    const internalRef = useRef<HTMLInputElement>(null);
+    
+    // Use the provided ref or fall back to internal ref
+    const finalRef = ref || internalRef;
+
+    // Sync value to input element directly to ensure it's always in sync
+    // This fixes issues where the input value can get out of sync in production builds
+    useEffect(() => {
+      if (finalRef && 'current' in finalRef && finalRef.current) {
+        const inputElement = finalRef.current;
+        if (value !== undefined && inputElement.value !== String(value)) {
+          inputElement.value = String(value);
+        }
+      }
+    }, [value, finalRef]);
 
     return (
       <div className="w-full">
@@ -24,7 +39,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           id={inputId}
           type={type}
-          ref={ref}
+          ref={finalRef}
+          defaultValue={defaultValue}
           className={cn(
             'flex h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm transition-colors',
             'placeholder:text-gray-400',
@@ -35,6 +51,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50',
             className
           )}
+          onChange={onChange}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
           {...props}

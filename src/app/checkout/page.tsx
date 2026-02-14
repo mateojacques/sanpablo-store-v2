@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,25 +34,38 @@ export default function CheckoutContactPage() {
 
   // Track if component has mounted (for hydration)
   const [hasMounted, setHasMounted] = useState(false);
+  // Track if form has been initialized with user data
+  const [formInitialized, setFormInitialized] = useState(false);
 
   const cart = cartData?.data;
   const isEmpty = !cart?.items || cart.items.length === 0;
+
+  // Create initial form values only once after auth is loaded
+  const initialFormValues = useMemo<ContactFormData>(() => {
+    return {
+      fullName: user?.fullName || "",
+      email: user?.email || "",
+      phone: "",
+      address: "",
+      customerNotes: "",
+    };
+  }, [user?.fullName, user?.email]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
+    setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      address: "",
-      customerNotes: "",
-    },
+    mode: "onBlur", // Changed from default to validate only on blur initially
+    defaultValues: initialFormValues,
   });
+
+  // Get form values for controlled component fallback
+  const formValues = watch();
 
   // Set mounted state on client side
   useEffect(() => {
@@ -60,17 +73,18 @@ export default function CheckoutContactPage() {
   }, []);
 
   // Update form with user data after auth loading completes
+  // Only do this once to avoid conflicts with user interactions
   useEffect(() => {
-    if (hasMounted && !authLoading) {
-      reset({
-        fullName: user?.fullName || "",
-        email: user?.email || "",
-        phone: "",
-        address: "",
-        customerNotes: "",
+    if (hasMounted && !authLoading && !formInitialized) {
+      // Reset the form with the correct values from user profile
+      reset(initialFormValues, {
+        keepValues: false,
+        keepDirty: false,
+        keepTouched: false,
       });
+      setFormInitialized(true);
     }
-  }, [hasMounted, authLoading, user, reset]);
+  }, [hasMounted, authLoading, formInitialized, initialFormValues, reset]);
 
   // Redirect if cart is empty
   useEffect(() => {
@@ -92,8 +106,9 @@ export default function CheckoutContactPage() {
     }
   };
 
-  // Show loading while auth is hydrating or cart is loading
-  if (!hasMounted || authLoading || cartLoading) {
+  // Show loading while component is mounting or auth/cart is loading
+  // Wait for form to be properly initialized
+  if (!hasMounted || !formInitialized || authLoading || cartLoading) {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary)]" />
