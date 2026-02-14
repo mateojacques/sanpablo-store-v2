@@ -300,6 +300,7 @@ export interface HeroBanner {
   subtitle?: string;
   ctaText?: string;
   ctaLink?: string;
+  isActive: boolean;
   sortOrder: number;
 }
 

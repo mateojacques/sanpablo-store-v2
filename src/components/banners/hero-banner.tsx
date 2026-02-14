@@ -47,15 +47,17 @@ function HeroBannerFallback() {
 }
 
 /**
- * Single banner slide
+ * Banner slide content (images + overlay text)
  */
-function BannerSlide({ banner }: { banner: HeroBannerType }) {
+function BannerSlideContent({ banner }: { banner: HeroBannerType }) {
+  const altText = banner.altText || banner.title || 'Banner promocional';
+
   return (
     <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
-      {/* Background Image */}
+      {/* Desktop Image */}
       <Image
         src={banner.imageUrl}
-        alt={banner.altText || banner.title || 'Banner promocional'}
+        alt={altText}
         fill
         className="object-cover hidden md:block"
         priority
@@ -63,13 +65,13 @@ function BannerSlide({ banner }: { banner: HeroBannerType }) {
       {/* Mobile Image */}
       <Image
         src={banner.mobileImageUrl || banner.imageUrl}
-        alt={banner.altText || banner.title || 'Banner promocional'}
+        alt={altText}
         fill
         className="object-cover md:hidden"
         priority
       />
-      
-      {/* Content */}
+
+      {/* Overlay Content */}
       <div className="absolute inset-0 flex items-center">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl text-white">
@@ -98,6 +100,29 @@ function BannerSlide({ banner }: { banner: HeroBannerType }) {
       </div>
     </div>
   );
+}
+
+/**
+ * Determines if ctaLink should wrap the entire banner.
+ * Wraps when ctaLink exists but ctaText does not (no CTA button visible).
+ */
+function isFullBannerLink(banner: HeroBannerType): boolean {
+  return Boolean(banner.ctaLink) && !banner.ctaText;
+}
+
+/**
+ * Single banner slide — wraps in a link when ctaLink exists without ctaText
+ */
+function BannerSlide({ banner }: { banner: HeroBannerType }) {
+  if (isFullBannerLink(banner)) {
+    return (
+      <Link href={banner.ctaLink!} className="block">
+        <BannerSlideContent banner={banner} />
+      </Link>
+    );
+  }
+
+  return <BannerSlideContent banner={banner} />;
 }
 
 /**
