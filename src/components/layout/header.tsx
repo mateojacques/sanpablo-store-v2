@@ -41,7 +41,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between gap-8">
           {/* Logo */}
           <div className="flex items-center">
             <StoreLogo variant="header" />

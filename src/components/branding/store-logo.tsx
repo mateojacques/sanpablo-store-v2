@@ -21,11 +21,11 @@ export function StoreLogo({ variant = 'header', className = '' }: StoreLogoProps
   const storeName = branding?.storeName ?? storefrontDefaults.branding.storeName;
 
   if (isLoading) {
-    const skeletonClassName = variant === 'header' ? 'h-8 w-[140px]' : 'h-10 w-[160px]';
+    const skeletonClassName = 'w-[160px] h-[56px]';
     return <Skeleton className={`${skeletonClassName} ${className}`} />;
   }
 
-  const logoBoxClassName = variant === 'header' ? 'h-8 w-[140px]' : 'h-10 w-[160px]';
+  const logoBoxClassName = 'w-[160px] h-[56px]';
 
   const content = logoUrl ? (
     <span className={`relative block ${logoBoxClassName} overflow-hidden ${className}`}>
