@@ -33,7 +33,7 @@ export function StoreLogo({ variant = 'header', className = '' }: StoreLogoProps
         src={logoUrl}
         alt={storeName}
         fill
-        sizes={variant === 'header' ? '140px' : '160px'}
+        sizes="160px"
         className="object-cover object-center"
         priority={variant === 'header'}
       />

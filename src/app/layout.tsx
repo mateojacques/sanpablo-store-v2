@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
-import { Header, Footer, CartDrawer } from '@/components/layout';
+import { Header, Footer, CartDrawer, WhatsAppButton } from '@/components/layout';
 import { getStorefrontConfig } from '@/lib/api/storefront-server';
 
 const inter = Inter({
@@ -46,6 +46,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <CartDrawer />
+          <WhatsAppButton />
         </Providers>
       </body>
     </html>

@@ -53,7 +53,7 @@ function BannerSlideContent({ banner }: { banner: HeroBannerType }) {
   const altText = banner.altText || banner.title || 'Banner promocional';
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
+    <div className="relative w-full h-[400px]">
       {/* Desktop Image */}
       <Image
         src={banner.imageUrl}

@@ -37,7 +37,9 @@ export const storefrontDefaults: StorefrontConfig = {
     email: 'contacto@sanpablo.com',
     phone: '+54 11 4321-1234',
     address: 'Av. Corrientes 1234, CABA, Argentina',
-    socialLinks: {},
+    socialLinks: {
+      whatsapp: '',
+    },
   },
   
   seo: {

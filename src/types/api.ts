@@ -325,7 +325,9 @@ export interface StorefrontContact {
   email: string;
   phone: string;
   address: string;
-  socialLinks: Record<string, string>;
+  socialLinks: Record<string, string> & {
+    whatsapp?: string;
+  };
 }
 
 export interface StorefrontSeo {

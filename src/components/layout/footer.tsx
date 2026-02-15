@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
 import { StoreLogo, SocialLinks } from '@/components/branding';
 import { useBranding, useContact } from '@/lib/providers';
 import { storefrontDefaults } from '@/lib/defaults/storefront-defaults';
@@ -36,6 +36,13 @@ export function Footer() {
   const phone = contact?.phone ?? storefrontDefaults.contact.phone;
   const address = contact?.address ?? storefrontDefaults.contact.address;
   const socialLinks = contact?.socialLinks ?? {};
+  const rawWhatsappChannelUrl =
+    contact?.socialLinks?.whatsapp ?? storefrontDefaults.contact.socialLinks.whatsapp;
+  const whatsappChannelUrl = rawWhatsappChannelUrl?.trim()
+    ? rawWhatsappChannelUrl.trim().startsWith('http')
+      ? rawWhatsappChannelUrl.trim()
+      : `https://${rawWhatsappChannelUrl.trim()}`
+    : '';
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -63,6 +70,28 @@ export function Footer() {
                 <SocialLinks links={socialLinks} />
               )}
             </div>
+
+            {contactLoading ? (
+              <div className="mt-4">
+                <Skeleton className="h-10 w-full max-w-sm bg-gray-700" />
+              </div>
+            ) : whatsappChannelUrl ? (
+              <div className="mt-4 max-w-sm">
+                <p className="text-sm text-gray-300">
+                  Seguí nuestro canal de WhatsApp para no perderte las novedades!
+                </p>
+                <a
+                  href={whatsappChannelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--color-primary)] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--color-primary-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                  aria-label="Abrir canal de WhatsApp"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Unirme al canal
+                </a>
+              </div>
+            ) : null}
           </div>
 
           {/* Shop Links */}
