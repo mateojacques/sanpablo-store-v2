@@ -2,15 +2,15 @@
 
 /* Default values - will be overridden by ThemeStyles component */
 :root {
-  --color-primary: #4a90d9;
-  --color-primary-dark: #3a7bc8;
+  --color-primary: #0fae8f;
+  --color-primary-dark: color-mix(in srgb, var(--color-primary) 85%, black);
   /* Brand color dark enough for small text on white or primary-50 */
   --color-primary-ink: color-mix(in srgb, var(--color-primary) 60%, black);
-  --color-primary-light: #6ba8e5;
-  --color-primary-50: #eef5fc;
-  --color-primary-100: #d4e6f7;
-  --color-secondary: #2c5282;
-  --color-secondary-dark: #234168;
+  --color-primary-light: color-mix(in srgb, var(--color-primary) 85%, white);
+  --color-primary-50: color-mix(in srgb, var(--color-primary) 10%, white);
+  --color-primary-100: color-mix(in srgb, var(--color-primary) 20%, white);
+  --color-secondary: #ffffff;
+  --color-secondary-dark: color-mix(in srgb, var(--color-secondary) 85%, black);
   --color-accent: #ed8936;
   --color-accent-dark: #dd6b20;
   --color-background: #ffffff;
