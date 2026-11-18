@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { CodeXml, Mail, Phone, MapPin } from 'lucide-react';
 import { StoreLogo, SocialLinks, WhatsAppIcon } from '@/components/branding';
 import { useBranding, useContact } from '@/lib/providers';
 import { storefrontDefaults } from '@/lib/defaults/storefront-defaults';
@@ -175,7 +175,7 @@ export function Footer() {
             <p className="text-sm text-gray-400">
               &copy; {new Date().getFullYear()} {storeName}. Todos los derechos reservados.
             </p>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
               {footerLinks.legal.map((link) => (
                 <Link
                   key={link.name}
@@ -186,6 +186,21 @@ export function Footer() {
                 </Link>
               ))}
             </div>
+            <a
+              href="https://go10.dev"
+              target="_blank"
+              rel="noopener"
+              aria-label="Hecho a mano por go10.dev (abre en una pestaña nueva)"
+              className="group inline-flex items-center gap-1.5 text-xs text-gray-500 transition-colors hover:text-white"
+            >
+              <CodeXml className="h-4 w-4 transition-transform group-hover:-rotate-12" aria-hidden="true" />
+              <span>
+                Hecho a mano por{' '}
+                <strong className="font-semibold text-gray-300 underline-offset-4 group-hover:text-white group-hover:underline">
+                  go10.dev
+                </strong>
+              </span>
+            </a>
           </div>
         </div>
       </div>
