@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CodeXml, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { StoreLogo, SocialLinks, WhatsAppIcon } from '@/components/branding';
 import { useBranding, useContact } from '@/lib/providers';
 import { storefrontDefaults } from '@/lib/defaults/storefront-defaults';
@@ -190,13 +190,31 @@ export function Footer() {
               href="https://go10.dev"
               target="_blank"
               rel="noopener"
-              aria-label="Hecho a mano por go10.dev (abre en una pestaña nueva)"
-              className="group inline-flex items-center gap-1.5 text-xs text-gray-500 transition-colors hover:text-white"
+              aria-label="Diseño y desarrollo por go10.dev (abre en una pestaña nueva)"
+              className="group inline-flex items-center gap-2 text-xs text-gray-400 transition-colors hover:text-white"
             >
-              <CodeXml className="h-4 w-4 transition-transform group-hover:-rotate-12" aria-hidden="true" />
+              <span
+                aria-hidden="true"
+                className="relative inline-block h-7 w-3.5 shrink-0 origin-top transition-transform duration-300 motion-safe:group-hover:-rotate-6"
+              >
+                {/* A 14 px decorative sprite with pre-sharpened 1x/2x/3x files: next/image would only resample it. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/go10/hand.webp"
+                  srcSet="/go10/hand.webp 1x, /go10/hand@2x.webp 2x, /go10/hand@3x.webp 3x"
+                  width={14}
+                  height={22}
+                  alt=""
+                  className="absolute left-0 top-0 h-[22px] w-[14px] max-w-none"
+                />
+                <svg viewBox="0 0 14 28" width={14} height={28} fill="none" className="absolute left-0 top-0 overflow-visible">
+                  <path d="M7.3 21.2c.7 1.3-.5 2.4 0 3.6" stroke="#e9c46a" strokeWidth={1.2} strokeLinecap="round" />
+                  <circle cx="7.3" cy="26.2" r="1.6" fill="#e9c46a" />
+                </svg>
+              </span>
               <span>
-                Hecho a mano por{' '}
-                <strong className="font-semibold text-gray-300 underline-offset-4 group-hover:text-white group-hover:underline">
+                Diseño y desarrollo por{' '}
+                <strong className="font-semibold text-gray-200 underline-offset-4 group-hover:text-white group-hover:underline">
                   go10.dev
                 </strong>
               </span>
